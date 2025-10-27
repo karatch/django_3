@@ -4,6 +4,7 @@ from .forms import UserForm
 
 
 def index(request):
+    print(request.POST)
     if request.method == 'POST':
         name = request.POST.get('name')
         age = request.POST.get('age')
