@@ -3,8 +3,15 @@ from django.forms import SelectDateWidget
 
 
 class UserForm(forms.Form):
-    name = forms.CharField(label='Имя', initial='undefined', help_text='Введите свое имя')
-    age = forms.IntegerField(
-        label='Ваш возраст', initial=16, widget=forms.Textarea, help_text='Введите свой возраст'
+    name = forms.CharField(
+        label='Имя', help_text='Введите свое имя', min_length=2, max_length=10
     )
-    field_order = ['age', 'name']
+    age = forms.IntegerField(
+        label='Ваш возраст',
+        help_text='Введите свой возраст',
+        required = False,
+        min_value=1,
+        max_value=99
+    )
+    reklama = forms.BooleanField(label='Согласны получать рекламу?', required=False)
+    field_order = ['name', 'age']
