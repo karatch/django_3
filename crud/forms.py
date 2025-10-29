@@ -7,9 +7,8 @@ class UserForm(forms.Form):
         label='Имя', help_text='Введите свое имя', min_length=2, max_length=10
     )
     age = forms.IntegerField(
-        label='Ваш возраст',
+        label='Ваш возраст?',
         help_text='Введите свой возраст',
-        required = False,
         min_value=1,
         max_value=99
     )
