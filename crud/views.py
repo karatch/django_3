@@ -1,12 +1,18 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UserForm
+from .models import Person
 
 
 def index(request):
-    userform = UserForm(request.POST or None)
+    people = Person.objects.all()
+    return render(request, 'index.html', {'people': people})
+
+
+def create(request):
     if request.method == 'POST':
-        if userform.is_valid():
-            name = userform.cleaned_data.get('name')
-            return HttpResponse(f'<h3>Hello, {name}</h3>')
-    return render(request, 'index.html', {'form': userform})
+        person = Person()
+        person.name = request.POST.get('name')
+        person.age = request.POST.get('age')
+        person.save()
+    return HttpResponseRedirect('/')
